@@ -11,9 +11,7 @@ const push = require("./push");
 const { log4js, cleanLogs, catLogs } = require("./logger");
 const tokenDir = ".token";
 
-sdkLogger.configure({
-  isDebugEnabled: process.env.CLOUD189_VERBOSE === "0",
-});
+sdkLogger.configure({ isDebugEnabled: false });
 
 // 个人任务签到
 const doUserTask = async (cloudClient, logger) => {
@@ -66,7 +64,6 @@ async function main() {
     const { userName, password } = account;
     const userNameInfo = mask(userName, 1, 10);
     const logger = log4js.getLogger(userName);
-    const userNameInfo = `Account_${index+1}`; 
     logger.addContext("user", userNameInfo);
     await run(userName, password, userSizeInfoMap, logger);
   }
